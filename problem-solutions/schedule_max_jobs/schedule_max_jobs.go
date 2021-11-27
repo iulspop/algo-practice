@@ -1,7 +1,7 @@
 package schedule_max_jobs
 
 func ScheduleMaxJobs(jobs [][2]int) (res [][2]int) {
-  return jobs
+	return jobs
 }
 
 /*
@@ -26,5 +26,8 @@ call create possible job sets(all jobs array)
 - array with all possible job sets
   - map/reduce to number of jobs
   - select first job set with maximum number
+
+
+
 
 */

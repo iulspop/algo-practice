@@ -1,6 +1,32 @@
 package schedule_max_jobs
 
 func ScheduleMaxJobs(jobs [][2]int) (res [][2]int) {
+	jobSchedules := [][][2]int{}
+	jobSchedule := [][2]int{}
+
+	createJobSets := func(jobs [][2]int) {
+		if len(jobs) == 0 {
+			append(jobSchedules, jobSchedule)
+			jobSchedule = [][2]int{}
+		} else {
+			min := 0
+			refIndex := 0
+			for i := 0; i < len(jobs); i++ {
+				job := jobs[i]
+				start :=job[0]
+
+				if start < min {
+					refIndex = i
+					min = start
+				}
+			}
+
+			append(jobSchedule, jobs[refIndex])
+			createJobSets(append(jobs[:refIndex], jobs[refIndex+1:]...))
+		}
+	}
+
+
 	return jobs
 }
 

@@ -1,5 +1,3 @@
-// fill please later
-
 package main
 
 import "fmt"

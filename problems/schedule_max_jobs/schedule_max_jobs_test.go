@@ -19,13 +19,14 @@ func TestSortIntervalsByEnd(t *testing.T) {
 	input := [][2]int{{32, 48}, {4, 12}, {2, 9}, {14, 34}, {10, 15}, {6, 15}}
 
 	result := SortIntervalsByEnd(input)
-	expected := [][2]int{{32, 48}, {4, 12}, {2, 9}, {14, 34}, {10, 15}, {6, 15}}
+	expected := [][2]int{{2, 9}, {4, 12}, {10, 15}, {6, 15}, {14, 34}, {32, 48}}
 
 	AssertEquals(t, "SortIntervalsByEnd()", result, expected)
 }
 
 func AssertEquals(t *testing.T, module string, result [][2]int, expected [][2]int) {
 	message := CreateTestMessage(module, result, expected)
+
 	if reflect.DeepEqual(result, expected) {
 		fmt.Print(message)
 	} else {

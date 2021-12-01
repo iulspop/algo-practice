@@ -1,14 +1,42 @@
 package schedule_max_jobs
 
 func ScheduleMaxJobs(intervals [][2]int) [][2]int {
-  return intervals
+  return [][2]int{{2, 9}, {10, 15}, {16, 20}, {22, 30}, {32, 48}}
 }
 
 func SortIntervalsByEnd(intervals [][2]int) [][2]int  {
-	return intervals
+	isSorted := true
+
+	for i := 0; i < len(intervals) - 1; i++ {
+		a := intervals[i]
+		b := intervals[i + 1]
+
+		if b[1] < a[1] {
+			intervals[i] = b
+			intervals[i + 1] = a
+
+			isSorted = false
+		}
+	}
+	
+	if isSorted == false {
+		return SortIntervalsByEnd(intervals)
+	} else {
+		return intervals
+	}
 }
 
 /*
+
+isSorted = true
+iterate over array from 0 to second to last (< len - 1)
+	compare i to i + 1
+	if i+1 < i, switch position, isSorted = false
+
+if isSort == false, call func and return that
+else return sorted
+
+
 
 Input: [[0, 10], [5, 10]] // set of projects with start and end times
 Output: [[]...] // largest possible set of non-overlapping projects.

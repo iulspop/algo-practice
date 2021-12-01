@@ -10,7 +10,7 @@ func TestScheduleMaxJobs(t *testing.T) {
 	input := [][2]int{{4, 12}, {2, 9}, {10, 15}, {6, 15}, {14, 34}, {16, 20}, {21, 30}, {22, 30}, {28, 46}, {32, 48}}
 
 	result := ScheduleMaxJobs(input)
-	expected := [][2]int{{2, 9}, {10, 15}, {16, 20}, {22, 30}, {32, 48}}
+	expected := [][2]int{{2, 9}, {10, 15}, {16, 20}, {21, 30}, {32, 48}}
 
 	AssertEquals(t, "ScheduleMaxJobs()", result, expected)
 }

@@ -1,7 +1,17 @@
 package schedule_max_jobs
 
 func ScheduleMaxJobs(intervals [][2]int) [][2]int {
-  return [][2]int{{2, 9}, {10, 15}, {16, 20}, {22, 30}, {32, 48}}
+	intervals = SortIntervalsByEnd(intervals)
+	lastInterval := intervals[0]
+	maxIntervals := [][2]int { lastInterval }
+
+	for i := 1; i < len(intervals); i++ {
+		if (lastInterval[1] >= intervals[i][0]) { continue }
+		maxIntervals = append(maxIntervals, intervals[i])
+		lastInterval = intervals[i]
+	}
+
+  return maxIntervals
 }
 
 func SortIntervalsByEnd(intervals [][2]int) [][2]int  {
@@ -18,7 +28,7 @@ func SortIntervalsByEnd(intervals [][2]int) [][2]int  {
 			isSorted = false
 		}
 	}
-	
+
 	if isSorted == false {
 		return SortIntervalsByEnd(intervals)
 	} else {
@@ -28,15 +38,30 @@ func SortIntervalsByEnd(intervals [][2]int) [][2]int  {
 
 /*
 
-isSorted = true
-iterate over array from 0 to second to last (< len - 1)
-	compare i to i + 1
-	if i+1 < i, switch position, isSorted = false
-
-if isSort == false, call func and return that
-else return sorted
 
 
+Problem: Movie Scheduling Problem
+Input: A set I of n intervals on the line.
+[][2]int{{4, 12}, {2, 9}, {10, 15}, {6, 15}, {14, 34}, {16, 20}, {21, 30}, {22, 30}, {28, 46}, {32, 48}}
+
+Output: What is the largest subset of mutually non-overlapping intervals that can be selected from I?
+[][2]int{{2, 9}, {10, 15}, {16, 20}, {22, 30}, {32, 48}}
+
+	isSorted = true
+	iterate over array from 0 to second to last (< len - 1)
+		compare i to i + 1
+		if i+1 < i, switch position, isSorted = false
+
+	if isSort == false, call func and return that
+	else return sorted
+
+	- save lastInterval
+	- save largestSetNonOverlapIntervals
+	- iterate over intervals from 1 to len
+		- if (lastInterval end >= i start) { skip }
+		- append interval
+		- set last interval
+	- return largest
 
 Input: [[0, 10], [5, 10]] // set of projects with start and end times
 Output: [[]...] // largest possible set of non-overlapping projects.
@@ -66,8 +91,7 @@ call create possible job sets(all jobs array)
 		0 1 2 3 4 5
 
 
-	- iterate over interals
-		- pick earliest end time that doesn't overlap
+
 
 
 */
